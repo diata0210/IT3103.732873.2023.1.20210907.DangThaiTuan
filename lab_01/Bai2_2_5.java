@@ -2,7 +2,7 @@ package lab_01;
 
 import javax.swing.JOptionPane;
 
-public class Bai5 {
+public class Bai2_2_5 {
   public static void main(String[] args) {
     String strNum1, strNum2;
     // Nhập số thứ 1

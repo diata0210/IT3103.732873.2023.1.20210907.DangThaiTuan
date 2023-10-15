@@ -1,4 +1,4 @@
-package lab_01.Bai6;
+package lab_01.Bai2_2_6;
 
 import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
