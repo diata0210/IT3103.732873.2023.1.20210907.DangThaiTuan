@@ -10,6 +10,7 @@ public class Bai6_5 {
     DecimalFormat format = new DecimalFormat("#.##");
     return format.format(number);
   }
+
   // Định dạng format cho các phần tử trong mảng
   public static String formatArray(double[] array) {
     StringBuilder formattedArray = new StringBuilder();
@@ -22,18 +23,17 @@ public class Bai6_5 {
     Scanner scanner = new Scanner(System.in);
     System.out.print("Tuan.DT_210907: Do you want to enter an array (Y/N)? ");
     String optionInput = scanner.next();
-    double[] array;
-    double sum = 0;
-
+    double[] array; // Khai báo mảng 
+    double sum = 0;  // Khai báo tổng 
+    // Nếu chọn Y 
     if (optionInput.equalsIgnoreCase("Y")) {
       System.out.print("Tuan.DT_210907: Enter the number of elements in the array: ");
-      int n = scanner.nextInt();
-      array = new double[n];
-      System.out.println("Tuan.DT_210907: Enter the array elements:");
-
+      int n = scanner.nextInt(); // Nhập n 
+      array = new double[n]; // mảng gồm n phần tử 
+      System.out.println("Tuan.DT_210907: Enter the array elements:"); // in ra chuỗi 
       for (int i = 0; i < n; i++) {
-        System.out.print("Tuan.DT_210907: array[" + i + "]: ");
-        array[i] = scanner.nextDouble();
+        System.out.print("Tuan.DT_210907: array[" + i + "]: "); // in ra chuỗi 
+        array[i] = scanner.nextDouble(); // nhập array[i]
       }
     } else {
       // Nếu người dùng không nhập
@@ -41,16 +41,15 @@ public class Bai6_5 {
     }
     // Sắp xếp mảng
     Arrays.sort(array);
-    // Tính tổng
     for (double num : array) {
-      sum += num;
+      sum += num;     // Tính tổng
     }
     // Tính trung bình
     double average = sum / array.length;
     // Display the results with the requested formatting
-    System.out.println("Tuan.DT_210907: Sorted Array: " + formatArray(array));
-    System.out.println("Tuan.DT_210907: Sum of Array Elements: " + formatNumber(sum));
-    System.out.println("Tuan.DT_210907: Average of Array Elements: " + formatNumber(average));
+    System.out.println("Tuan.DT_210907: Sorted Array: " + formatArray(array)); // in ra chuỗi 
+    System.out.println("Tuan.DT_210907: Sum of Array Elements: " + formatNumber(sum)); // in ra tổng 
+    System.out.println("Tuan.DT_210907: Average of Array Elements: " + formatNumber(average)); //in ra trung bình 
   }
 
 }

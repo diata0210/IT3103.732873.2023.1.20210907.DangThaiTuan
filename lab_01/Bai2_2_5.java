@@ -1,7 +1,5 @@
 package lab_01;
-
 import javax.swing.JOptionPane;
-
 public class Bai2_2_5 {
   public static void main(String[] args) {
     String strNum1, strNum2;
@@ -18,10 +16,13 @@ public class Bai2_2_5 {
     double resultMinus = num1 - num2; // tính trừ
     double resultMul = num1 * num2; // tính nhân
     double resultDiv; // chia 
-
+    // nếu num2 == 0 
     if (num2 == 0) {
+      // in ra thông báo lỗi
       JOptionPane.showMessageDialog(null, "Tuan.DT210907: Error: Division by zero", "Tuan.DT210907: Error", JOptionPane.ERROR_MESSAGE);
     } else {
+      // khác 0 thỏa mãn điều kiện -> chia
+      // -> in ra thông báo 
       resultDiv = num1 / num2;
       JOptionPane.showMessageDialog(null, "Tuan.DT210907: \n" + "Addition: " + resultPlus + "\nSubtraction: " + resultMinus
           + "\nMultiplication: " + resultMul + "\nDivision: " + resultDiv, "Result", JOptionPane.INFORMATION_MESSAGE);
