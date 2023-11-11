@@ -52,4 +52,9 @@ public class DigitalVideoDisc {
         return category;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    
 }
