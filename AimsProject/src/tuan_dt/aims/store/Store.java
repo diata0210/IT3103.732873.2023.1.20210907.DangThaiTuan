@@ -1,4 +1,6 @@
-package lab_02;
+package AimsProject.src.tuan_dt.aims.store;
+
+import AimsProject.src.tuan_dt.aims.disc.DigitalVideoDisc;
 
 public class Store {
     private DigitalVideoDisc itemsInStore[];
