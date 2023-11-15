@@ -1,4 +1,7 @@
-package lab_02;
+package AimsProject.src.tuan_dt.test;
+
+import AimsProject.src.tuan_dt.aims.cart.Cart;
+import AimsProject.src.tuan_dt.aims.disc.DigitalVideoDisc;
 
 public class CartTest {
     public static void main(String[] args) {

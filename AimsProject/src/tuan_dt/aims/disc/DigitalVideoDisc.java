@@ -1,4 +1,4 @@
-package lab_02;
+package AimsProject.src.tuan_dt.aims.disc;
 
 public class DigitalVideoDisc {
     private String title;
