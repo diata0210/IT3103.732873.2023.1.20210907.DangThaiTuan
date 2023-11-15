@@ -93,7 +93,7 @@ public class Cart {
     // Tính tổng số đĩa
     for (int i = 0; i < qtyOrdered; i++) {
       DigitalVideoDisc dvd = itemsOrdered[i];
-      System.out.println(i + 1 + ". DVD - " + dvd);
+      System.out.println(i + 1 + ". DVD - " + dvd.getTitle());
     }
     // in ra tổng số tiền
     System.out.println("Tuan_DT_210907: \nTotal cost: " + totalCost());
@@ -107,7 +107,7 @@ public class Cart {
       // Nếu trùng ID thì trả về true và thoát ra khỏi vòng lặp
       if (itemsOrdered[i].getId() == id) {
         found = true;
-        System.out.println("Tuan_DT_210907: Found: " + id + ": " + itemsOrdered[i]);
+        System.out.println("Tuan_DT_210907: Found: " + id + ": " + itemsOrdered[i].getTitle());
         break;
       }
     }
@@ -123,7 +123,7 @@ public class Cart {
     for (int i = 0; i < qtyOrdered; i++) {
       if (itemsOrdered[i].isMatch(title)) {
         found = true;
-        System.out.println("Tuan_DT_210907: Found: " + title + ": " + itemsOrdered[i]);
+        System.out.println("Tuan_DT_210907: Found: " + title + ": " + itemsOrdered[i].getTitle());
       }
     }
     // Nếu không tìm thấy thì trả về not founded
