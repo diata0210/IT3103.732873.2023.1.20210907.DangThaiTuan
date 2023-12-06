@@ -1,136 +1,123 @@
 package AimsProject.src.tuan_dt.aims.cart;
 
-import AimsProject.src.tuan_dt.aims.disc.DigitalVideoDisc;
+import java.util.ArrayList;
+import java.util.Collections;
+
+import AimsProject.src.tuan_dt.aims.media.media;
 
 public class Cart {
-  private int qtyOrdered;
-  public static final int MAX_NUMBERS_ORDERED = 20;
-  private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
+	private int qtyOrdered;
+	public static final int MAX_NUMBERS_ORDERED = 20;
 
-  public void addDigitalVideoDisc(DigitalVideoDisc disc) {
-    // Kiểm tra xem còn chỗ trống trong mảng để thêm đĩa không
-    if (qtyOrdered < MAX_NUMBERS_ORDERED) {
-      itemsOrdered[qtyOrdered] = disc; // Thêm vào mảng
-      qtyOrdered++; // Tăng số lượng đã thêm vào
-      System.out.println("Tuan.DT210907: The disc has been added"); // In thông báo thêm thành công
-    } else {
-      System.out.println("Tuan.DT210907: The cart is almost full"); // In thông báo nếu đầy
-    }
-  }
+	private ArrayList<media> itemsOrdered = new ArrayList<media>();
 
-  public void addDigitalVideoDisc(DigitalVideoDisc[] dvdList) {
-    for (DigitalVideoDisc disc : dvdList) {
-      // Kiểm tra xem số lượng đĩa đã đầy chưa
-      if (qtyOrdered < MAX_NUMBERS_ORDERED) {
-        itemsOrdered[qtyOrdered] = disc; // Thêm đĩa
-        qtyOrdered++; // Tăng số lượng đĩa hiện tại lên 1
-        System.out.println("Tuan.DT210907: The disc '" + disc.getTitle() + "' has been added");
-      } else {
-        System.out.println("Tuan.DT210907: The cart is almost full. Cannot add '" + disc.getTitle() + "'");
-      }
-    }
-  }
+	public void addMedia(media media) {
+		if (itemsOrdered.size() == MAX_NUMBERS_ORDERED) {
+			System.out.println("Tuan_DT_210907: The cart is full.");
+		} else if (itemsOrdered.contains(media)) {
+			System.out.println("Tuan_DT_210907: Media already in cart.");
+		} else {
+			itemsOrdered.add(media);
+			System.out.println("Tuan_DT_210907: Added " + media.toString() + " to cart.");
+		}
+		System.out.println("Tuan_DT_210907: Current items in cart: " + itemsOrdered.size());
+	}
 
-  public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
-    // Kiểm tra xem hiện tại đã đầy chưa.
-    if (qtyOrdered < MAX_NUMBERS_ORDERED) {
-      // thêm đĩa dvd1
-      itemsOrdered[qtyOrdered] = dvd1;
-      qtyOrdered++;
-      System.out.println("Tuan.DT210907: The disc '" + dvd1.getTitle() + "' has been added");
-    } else {
-      System.out.println("Tuan.DT210907: The cart is almost full. Cannot add '" + dvd1.getTitle() + "'");
-    }
+	public void removeMedia(media media) {
+		if (itemsOrdered.remove(media)) {
+			System.out.println("Tuan_DT_210907: Removed " + media.toString() + " from cart.");
+		} else {
+			System.out.println("Tuan_DT_210907: Couldn't find this item.");
+		}
+	}
 
-    // Kiểm tra xem hiện tại đã đầy chưa.
-    if (qtyOrdered < MAX_NUMBERS_ORDERED) {
-      // thêm đĩa dvd2
-      itemsOrdered[qtyOrdered] = dvd2;
-      qtyOrdered++;
-      System.out.println("Tuan.DT210907: The disc '" + dvd2.getTitle() + "' has been added");
-    } else {
-      System.out.println("Tuan.DT210907: The cart is almost full. Cannot add '" + dvd2.getTitle() + "'");
-    }
-  }
+	// lay thong tin title
+	public media fetchMedia(String title) {
+		for (media m : itemsOrdered) {
+			if (m.isMatch(title))
+				return m;
+		}
+		return null;
+	}
 
-  public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
-    boolean found = false;
-    int index = 0;
-    // Tìm vị trí của đĩa cần xóa trong mảng
-    for (int i = 0; i < qtyOrdered; i++) {
-      if (itemsOrdered[i] == disc) {
-        found = true;
-        index = i;
-        break;
-      }
-    }
+	// in ra so luong
+	public void print() {
+		System.out.println("\n***********************CART***********************");
+		System.out.println("Ordered Items:");
+		for (int i = 0; i < itemsOrdered.size(); i++) {
+			System.out.println((i + 1) + ". " + itemsOrdered.get(i).toString());
+		}
+		System.out.println("Total cost: " + totalCost() + " $");
+		System.out.println("**************************************************");
+	}
 
-    if (found) {
-      // Di chuyển các phần tử còn lại của mảng để loại bỏ đĩa
-      for (int i = index; i < qtyOrdered - 1; i++) {
-        itemsOrdered[i] = itemsOrdered[i + 1];
-      }
-      // Đặt phần tử cuối cùng trong mảng thành null
-      itemsOrdered[qtyOrdered - 1] = null;
-      qtyOrdered--; // Giảm số lượng đĩa đã thêm vào giỏ hàng
-      System.out.println("Tuan.DT210907: Removed '" + disc.getTitle() + "' from the cart."); // In thông báo xóa
-                                                                                             // đĩa thành công
-    } else {
-      System.out.println("Tuan.DT210907: The disc is not in the cart."); // In thông báo nếu đĩa không có trong
-                                                                         // giỏ hàng
-    }
-  }
+	public void placeOrder() {
+		if (itemsOrdered.isEmpty()) {
+			System.out.println("The cart is empty.");
+			return;
+		}
+		itemsOrdered.clear();
+		System.out.println("Your order has been placed.");
+	}
 
-  // tinh tong tien
-  public float totalCost() {
-    float total = 0;
-    for (int i = 0; i < qtyOrdered; i++) {
-      total += itemsOrdered[i].getCost();
-    }
-    return total;
-  }
-  public void printCart() {
-    System.out.println("Tuan_DT_210907: ***********************CART***********************");
-    System.out.println("Tuan_DT_210907: Ordered Items:\n");
-    // Tính tổng số đĩa
-    for (int i = 0; i < qtyOrdered; i++) {
-      DigitalVideoDisc dvd = itemsOrdered[i];
-      System.out.println(i + 1 + ". DVD - " + dvd.getTitle());
-    }
-    // in ra tổng số tiền
-    System.out.println("Tuan_DT_210907: \nTotal cost: " + totalCost());
-    System.out.println("Tuan_DT_210907: ***************************************************");
-  }
+	// tinh tong tien
+	public float totalCost() {
+		float cost = 0;
+		for (media m : itemsOrdered) {
+			cost += m.getCost();
+		}
+		return cost;
+	}
 
-  public void searchById(int id) {
-    boolean found = false;
-    // duyệt tất cả các đĩa 
-    for (int i = 0; i < qtyOrdered; i++) {
-      // Nếu trùng ID thì trả về true và thoát ra khỏi vòng lặp
-      if (itemsOrdered[i].getId() == id) {
-        found = true;
-        System.out.println("Tuan_DT_210907: Found: " + id + ": " + itemsOrdered[i].getTitle());
-        break;
-      }
-    }
-    // nếu không tìm thấy thì in ra chuỗi notfounded + id 
-    if (!found) {
-      System.out.println("Tuan_DT_210907: Not Founded " + id);
-    }
-  }
+	// sap xep boi title
 
-  public void searchByTitle(String title) {
-    boolean found = false;
-    // duyệt tất cả các đĩa nếu trùng thì trả về true 
-    for (int i = 0; i < qtyOrdered; i++) {
-      if (itemsOrdered[i].isMatch(title)) {
-        found = true;
-        System.out.println("Tuan_DT_210907: Found: " + title + ": " + itemsOrdered[i].getTitle());
-      }
-    }
-    // Nếu không tìm thấy thì trả về not founded
-    if (!found) {
-      System.out.println("Tuan_DT_210907: Not founded: " + title);
-    }
-  }
+	public void sortByTitle() {
+		Collections.sort(itemsOrdered, media.COMPARE_BY_TITLE_COST);
+	}
+
+	public void sortByCost() {
+		Collections.sort(itemsOrdered, media.COMPARE_BY_COST_TITLE);
+	}
+
+	//sap xep boi gia
+
+	public void printCart() {
+		System.out.println("Tuan_DT_210907: ***********************CART***********************");
+		System.out.println("Tuan_DT_210907: Ordered Items:\n");
+		// Tính tổng số đĩa
+		for (int i = 0; i < qtyOrdered; i++) {
+			System.out.println(i + 1 + ". DVD - " + itemsOrdered.get(i).getTitle());
+		}
+		// in ra tổng số tiền
+		System.out.println("Tuan_DT_210907: \nTotal cost: " + totalCost());
+		System.out.println("Tuan_DT_210907: ***************************************************");
+	}
+
+	public void searchById(int id) {
+		// duyệt tất cả các đĩa
+		System.out.println("Tuan_DT_210907: Search results for ID: " + id);
+		for (media m : itemsOrdered) {
+			if (m.getId() == id) {
+				System.out.println(m.toString());
+				return;
+			}
+		}
+		System.out.println("Tuan_DT_210907: No items found.");
+		// nếu không tìm thấy thì in ra chuỗi notfounded + id
+	}
+
+	public void searchByTitle(String title) {
+		boolean found = false;
+		// duyệt tất cả các đĩa nếu trùng thì trả về true
+		for (media m : itemsOrdered) {
+			if (m.isMatch(title)) {
+				System.out.println(m.toString());
+				found = true;
+			}
+		}
+		// Nếu không tìm thấy thì trả về not founded
+		if (!found) {
+			System.out.println("Tuan_DT_210907: Not founded: " + title);
+		}
+	}
 }
