@@ -1,73 +1,60 @@
 package AimsProject.src.tuan_dt.aims.disc;
 
-public class DigitalVideoDisc {
-    private String title;
-    private String category;
-    private String director;
-    private int length;
-    private float cost;
-    private int id;
+import java.util.Scanner;
 
-    private static int nbDigitalVideoDiscs = 0;
+import AimsProject.src.tuan_dt.aims.media.Playable;
+import AimsProject.src.tuan_dt.aims.media.disc;
+
+public class DigitalVideoDisc extends disc implements Playable {
+
+    @Override
+    public void play() {
+        if (length <= 0) {
+            System.out.println("Tuan.DT_210907: This DVD cannot be played.");
+            return;
+        }
+        System.out.println("Playing DVD: " + this.getTitle());
+        System.out.println("DVD length: " + this.getLength());
+    }
 
     public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
-        this.title = title;
-        this.category = category;
-        this.director = director;
-        this.length = length;
-        this.cost = cost;
-        this.id = ++nbDigitalVideoDiscs;
+        super(title, category, director, length, cost);
     }
 
     public DigitalVideoDisc(String title, String category, String director, float cost) {
-        this.title = title;
-        this.category = category;
-        this.director = director;
-        this.cost = cost;
-        this.id = ++nbDigitalVideoDiscs;
+        super(title, category, director, cost);
     }
 
-    public DigitalVideoDisc(String category, String title, float cost) {
-        this.title = title;
-        this.category = category;
-        this.cost = cost;
-        this.id = ++nbDigitalVideoDiscs;
+    public DigitalVideoDisc(String title, String category, float cost) {
+        super(title, category, cost);
     }
 
     public DigitalVideoDisc(String title) {
-        this.title = title;
-        this.id = ++nbDigitalVideoDiscs;
+        super(title);
     }
 
-    public String getTitle() {
-        return title;
-    }
+    public static DigitalVideoDisc createDVD() {
+        System.out.println("---New DVD---");
+        String title, category, director;
+        int length;
+        float cost;
+        Scanner sc = new Scanner(System.in);
 
-    public float getCost() {
-        return cost;
-    }
+        System.out.print("Enter title: ");
+        title = sc.nextLine();
 
-    public String getDirector() {
-        return director;
-    }
+        System.out.print("Enter category: ");
+        category = sc.nextLine();
 
-    public int getLength() {
-        return length;
-    }
+        System.out.print("Enter director: ");
+        director = sc.nextLine();
 
-    public String getCategory() {
-        return category;
-    }
+        System.out.print("Enter length: ");
+        length = sc.nextInt();
 
-    public int getId() {
-        return id;
-    }
+        System.out.print("Enter cost: ");
+        cost = sc.nextFloat();
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public boolean isMatch(String titleToMatch) {
-        return this.title.equalsIgnoreCase(titleToMatch);
+        return new DigitalVideoDisc(title, category, director, length, cost);
     }
 }

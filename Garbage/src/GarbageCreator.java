@@ -18,13 +18,13 @@ public class GarbageCreator {
 
         startTime = System.currentTimeMillis();
         try (Scanner scanner = new Scanner(inputStream, StandardCharsets.ISO_8859_1.name())) {
-            StringBuffer outputStringBuffer = new StringBuffer();
+            StringBuilder outputStringBuilder = new StringBuilder();
             while (scanner.hasNext()) {
-                outputStringBuffer.append(scanner.next());
+                outputStringBuilder.append(scanner.next());
             }
-            String outputString = outputStringBuffer.toString();
+            String outputString = outputStringBuilder.toString();
             endTime = System.currentTimeMillis();
-            System.out.println(endTime - startTime);
+            System.out.println("Tuan.DT210907: " + (endTime - startTime));
         } catch (Exception e) {
             System.out.println(e);
         }

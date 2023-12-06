@@ -13,8 +13,8 @@ public class TestPassingParameter {
     }
 
     public static void swap(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
-        String tmp = dvd1.getTitle();
-        dvd1.setTitle(dvd2.getTitle());
-        dvd2.setTitle(tmp);
+        // String tmp = dvd1.getTitle();
+        // dvd1.setTitle(dvd2.getTitle());
+        // dvd2.setTitle(tmp);
     }
 }
