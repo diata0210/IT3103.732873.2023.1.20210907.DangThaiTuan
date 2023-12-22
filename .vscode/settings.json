@@ -1,0 +1,7 @@
+{
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "d:\\Downloads\\jar_files\\swing-layout-1.0.2.jar",
+    "d:\\swing-v3.9.4.001.jar"
+  ]
+}
